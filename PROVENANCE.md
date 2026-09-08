@@ -15,6 +15,12 @@ The architectural split is motif construction → affine group action → render
 
 The language note and `.pattern` examples are copied here so Conway can evolve independently. Implementation files that remain Cayley-specific are linked from `boilerplate/archive/cayley-pr2/README.md` at the exact snapshot commit.
 
+## The Sensual (Quadratic) Form notes
+
+`books/the-sensual-quadratic-form/README.md` is new repository material consisting of an original bibliographic note, chapter-by-chapter summaries, and Idriç design observations. It was written from official publisher metadata, JSTOR and Cambridge Core chapter descriptions/previews, and the Mathematical Association of America review.
+
+The underlying book, John Horton Conway's *The Sensual (Quadratic) Form* (assisted by Francis Y. C. Fung, Mathematical Association of America, 1997), remains a third-party copyrighted work. No full-text copy is included and no third-party redistribution right is asserted by this repository.
+
 ## New Conway material
 
 Files written specifically for this repository should remain distinguishable from the archived prototype until a deliberate repository-wide licensing decision is made.
