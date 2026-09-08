@@ -1,9 +1,10 @@
 # Conway
 
-A pattern language for planar symmetry, with rendered wallpapers in Conway orbifold notation.
+A pattern language for planar symmetry, with rendered wallpapers in Conway orbifold notation, plus Conway-related mathematical notes.
 
 - **[Pattern language](pattern-language/)** — the language draft, examples, and mathematical references
 - **[Wallpapers](wallpapers/)** — the rendered SVGs and the Idriç wallpaper source
+- **[The Sensual (Quadratic) Form](books/the-sensual-quadratic-form/README.md)** — bibliographic record, chapter-by-chapter guide, and Idriç type-system implications; no unlicensed full-text mirror
 
 ## Wallpapers
 
