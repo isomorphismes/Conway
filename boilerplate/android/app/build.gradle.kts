@@ -3,7 +3,6 @@ plugins {
 }
 
 val stableTestKeystorePath = providers.environmentVariable("CONWAY_TEST_KEYSTORE").orNull
-    ?: error("CONWAY_TEST_KEYSTORE is required; refusing to build an installable APK with an ephemeral signer")
 val stableTestKeystorePassword = providers.environmentVariable("CONWAY_TEST_KEYSTORE_PASSWORD").orNull
     ?: "wegert-debug"
 val stableTestKeyPassword = providers.environmentVariable("CONWAY_TEST_KEY_PASSWORD").orNull
@@ -35,18 +34,22 @@ android {
     }
 
     signingConfigs {
-        create("stableTest") {
-            storeFile = rootProject.file(stableTestKeystorePath)
-            storePassword = stableTestKeystorePassword
-            keyAlias = stableTestKeyAlias
-            keyPassword = stableTestKeyPassword
-            storeType = "pkcs12"
+        stableTestKeystorePath?.let { keystorePath ->
+            create("stableTest") {
+                storeFile = rootProject.file(keystorePath)
+                storePassword = stableTestKeystorePassword
+                keyAlias = stableTestKeyAlias
+                keyPassword = stableTestKeyPassword
+                storeType = "pkcs12"
+            }
         }
     }
 
     buildTypes {
         getByName("debug") {
-            signingConfig = signingConfigs.getByName("stableTest")
+            // If no stable test signer is supplied, keep debug unsigned instead
+            // of falling back to a machine-local Gradle debug identity.
+            signingConfig = signingConfigs.findByName("stableTest")
         }
     }
 
