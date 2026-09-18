@@ -2,6 +2,15 @@ plugins {
     id("com.android.application")
 }
 
+val stableTestKeystorePath = providers.environmentVariable("CONWAY_TEST_KEYSTORE").orNull
+    ?: error("CONWAY_TEST_KEYSTORE is required; refusing to build an installable APK with an ephemeral signer")
+val stableTestKeystorePassword = providers.environmentVariable("CONWAY_TEST_KEYSTORE_PASSWORD").orNull
+    ?: "wegert-debug"
+val stableTestKeyPassword = providers.environmentVariable("CONWAY_TEST_KEY_PASSWORD").orNull
+    ?: stableTestKeystorePassword
+val stableTestKeyAlias = providers.environmentVariable("CONWAY_TEST_KEY_ALIAS").orNull
+    ?: "wegert-debug"
+
 android {
     namespace = "org.isomorphisms.conway"
     compileSdk = 36
@@ -22,6 +31,22 @@ android {
             cmake {
                 arguments += "-DANDROID_STL=none"
             }
+        }
+    }
+
+    signingConfigs {
+        create("stableTest") {
+            storeFile = rootProject.file(stableTestKeystorePath)
+            storePassword = stableTestKeystorePassword
+            keyAlias = stableTestKeyAlias
+            keyPassword = stableTestKeyPassword
+            storeType = "pkcs12"
+        }
+    }
+
+    buildTypes {
+        getByName("debug") {
+            signingConfig = signingConfigs.getByName("stableTest")
         }
     }
 
