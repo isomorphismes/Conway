@@ -23,7 +23,6 @@ jobs:
       CONWAY_TEST_KEYSTORE_PASSWORD: wegert-debug
       CONWAY_TEST_KEY_PASSWORD: wegert-debug
       CONWAY_TEST_KEY_ALIAS: wegert-debug
-      CONWAY_EXPECTED_CERT_SHA256: DE:9B:1D:47:C5:A6:5E:6D:46:A2:04:B7:9D:D9:EE:56:6B:9D:3C:98:32:BA:81:EB:C4:21:3D:33:92:E9:2F:F9
     steps:
       - name: Check out Conway
         uses: actions/checkout@v4
@@ -60,32 +59,17 @@ jobs:
           grep -q 'uniform vec2 u_pan' boilerplate/android/app/src/main/assets/conway-wallpaper.frag
           grep -q 'uniform float u_aspect' boilerplate/android/app/src/main/assets/conway-wallpaper.frag
 
-      - name: Verify stable test signing identity
-        shell: bash
-        run: |
-          set -euo pipefail
-          keytool -list -v \
-            -keystore "$CONWAY_TEST_KEYSTORE" \
-            -storepass "$CONWAY_TEST_KEYSTORE_PASSWORD" \
-            -alias "$CONWAY_TEST_KEY_ALIAS" \
-            | grep -F "SHA256: $CONWAY_EXPECTED_CERT_SHA256"
-
       - name: Build debug APK
         shell: bash
         run: |
           set -o pipefail
           gradle -p boilerplate/android --no-daemon --stacktrace :app:assembleDebug 2>&1 | tee android-build.log
 
-      - name: Verify APK signer
-        shell: bash
-        run: |
-          set -euo pipefail
-          sdk_root="${ANDROID_SDK_ROOT:-$ANDROID_HOME}"
-          apk=boilerplate/android/app/build/outputs/apk/debug/app-debug.apk
-          "$sdk_root/build-tools/36.0.0/apksigner" verify --print-certs "$apk" \
-            | tee /tmp/conway-signing.txt
-          expected="$(printf '%s' "$CONWAY_EXPECTED_CERT_SHA256" | tr '[:upper:]' '[:lower:]' | tr -d ':')"
-          grep -Fq "Signer #1 certificate SHA-256 digest: $expected" /tmp/conway-signing.txt
+      - name: Verify finished APK signer against central registry
+        uses: isomorphisms/ai-ci/android-signing@b3af13b3ab2bac9dd7c72bf9dd855ed5a17609b5
+        with:
+          apk: boilerplate/android/app/build/outputs/apk/debug/app-debug.apk
+          lane: test
 
       - name: Upload Android build log
         if: always()
