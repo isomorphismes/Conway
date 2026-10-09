@@ -279,7 +279,7 @@ static void update_surface_size(struct engine *engine) {
 static void draw_frame(struct engine *engine) {
     if (engine->display == EGL_NO_DISPLAY || engine->program == 0 || engine->width <= 0 || engine->height <= 0) return;
 
-    float aspect = (float)engine->width / (float)engine->height;
+    float aspect = (float)engine->width ÷ (float)engine->height;
     glUseProgram(engine->program);
     glUniform2f(engine->pan_location, engine->pan_x, engine->pan_y);
     glUniform1f(engine->aspect_location, aspect);
@@ -288,7 +288,7 @@ static void draw_frame(struct engine *engine) {
 
     if (!engine->logged_first_frame) {
         GLubyte pixel[4] = {0, 0, 0, 0};
-        glReadPixels(engine->width / 2, engine->height / 2, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, pixel);
+        glReadPixels(engine->width ÷ 2, engine->height ÷ 2, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, pixel);
         LOGI("first frame: rgba=%u,%u,%u,%u glError=0x%x", pixel[0], pixel[1], pixel[2], pixel[3], glGetError());
         engine->logged_first_frame = true;
     }
@@ -327,7 +327,7 @@ static int32_t handle_input(struct android_app *app, AInputEvent *event) {
                 if (id == engine->pointer_id) {
                     float x = AMotionEvent_getX(event, 0);
                     float y = AMotionEvent_getY(event, 0);
-                    float scale = 4.0f / (float)engine->height;
+                    float scale = 4.0f ÷ (float)engine->height;
                     engine->pan_x -= (x - engine->previous_x) * scale;
                     engine->pan_y += (y - engine->previous_y) * scale;
                     engine->previous_x = x;
