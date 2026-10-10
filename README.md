@@ -38,3 +38,13 @@ node --test pattern-language/tests/pattern.test.mjs
 CI runs the same tests whenever the language, runner, or examples change.
 
 The Android, F-Droid, Fastlane, build, migration, and archived prototype material is collected under [`boilerplate/`](boilerplate/). Source history and licensing are recorded in [`PROVENANCE.md`](PROVENANCE.md), [`LICENSE`](LICENSE), and [`boilerplate/third-party.md`](boilerplate/third-party.md).
+
+## Hyperbolic symmetry: *237 and the Klein quartic
+
+The standalone [hyperbolic *237 experiment](hyperbolic237/) constructs numerical Poincaré-disk reflections alongside an **exact** PGL(2,F7) quotient. It checks the 24-heptagon / 84-edge / 56-vertex regular map of the genus-three Klein quartic. This intentionally does not reuse the planar affine matrix representation of the ordinary `.pattern` grammar.
+
+```sh
+node hyperbolic237/render.mjs json
+node hyperbolic237/render.mjs svg klein-237.svg
+node --test hyperbolic237/tests/triangle237.test.mjs
+```
