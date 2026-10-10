@@ -13,12 +13,25 @@ heptagon labels** (repeated across the universal cover).
 ```sh
 node hyperbolic237/render.mjs json
 node hyperbolic237/render.mjs svg klein-237.svg
+node hyperbolic237/render-domain.mjs svg klein-237-fundamental-polygon.svg
+node hyperbolic237/render-domain.mjs json klein-237-pairings.json
 node --test hyperbolic237/tests/*.test.mjs
 ```
 
 The SVG colors come from exact right cosets in PGL(2,7). The image displays a
 **patch of the universal cover**, not an embedding of the closed Riemann
 surface. The outer white ring shows where the finite patch stops.
+
+## Explicit genus-three fundamental polygon
+
+The [88-side geometric fundamental polygon](FUNDAMENTAL-POLYGON.md) is the next
+step beyond finite coset coloring. Its 336 exact chamber representatives have
+460 genuinely shared internal edges and a single **88-side boundary cycle**;
+44 pairs of boundary edges have explicit, orientation-preserving kernel words.
+A faithful **exact Tits representation** over `Z[2 cos(pi/7)]` decides equality
+in the *infinite* reflection group. The disk coordinates are numerical only.
+Identifying all sides gives `V=164`, `E=504`, `F=336`, hence genus three.
+The new renderer outputs an SVG and the full pairing table as JSON.
 
 ## The group structure
 
@@ -67,8 +80,8 @@ with Gauss–Bonnet.
   The tiling engine suppresses approximate duplicate chambers only for drawing,
   and checks that their *exact* finite labels agree.
 - **Not implemented:** a general hyperbolic `orbifold` command in `.pattern`,
-  a normal-form algorithm for the infinite Coxeter group, a compact 14-gon with
-  explicit paired sides, or a faithful 3D Klein-quartic embedding. The 24
+  a normal-form algorithm for the infinite Coxeter group, a **minimal** compact 12- or 14-gon, or a faithful
+  3D Klein-quartic embedding. The 24
   coset-colors visualize its regular map; they do not by themselves produce
   a geometric quotient mesh.
 - **Integration:** `Conway/pattern-language` currently represents Euclidean

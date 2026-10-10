@@ -30,4 +30,4 @@ jobs:
         with:
           node-version: '22'
       - name: Run pattern language tests
-        run: node --test pattern-language/tests/pattern.test.mjs hyperbolic237/tests/triangle237.test.mjs
+        run: node --test pattern-language/tests/pattern.test.mjs hyperbolic237/tests/*.test.mjs

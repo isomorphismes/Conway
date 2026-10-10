@@ -48,3 +48,5 @@ node hyperbolic237/render.mjs json
 node hyperbolic237/render.mjs svg klein-237.svg
 node --test hyperbolic237/tests/triangle237.test.mjs
 ```
+
+The next [geometric fundamental polygon](hyperbolic237/FUNDAMENTAL-POLYGON.md) has **336 exact chamber representatives** in one connected 88-sided disk, plus **44 explicit deck-transformation words** identifying its paired boundary edges. Its independent infinite-group equality oracle is the faithful integral Tits representation, not the finite quotient or pixel coordinates.
