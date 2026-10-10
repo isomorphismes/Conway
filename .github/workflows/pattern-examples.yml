@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/pattern-examples.yml'
       - 'pattern-language/**'
+      - 'hyperbolic237/**'
       - 'README.md'
   push:
     branches:
@@ -12,6 +13,7 @@ on:
     paths:
       - '.github/workflows/pattern-examples.yml'
       - 'pattern-language/**'
+      - 'hyperbolic237/**'
       - 'README.md'
   workflow_dispatch:
 
@@ -28,4 +30,4 @@ jobs:
         with:
           node-version: '22'
       - name: Run pattern language tests
-        run: node --test pattern-language/tests/pattern.test.mjs
+        run: node --test pattern-language/tests/pattern.test.mjs hyperbolic237/tests/triangle237.test.mjs
