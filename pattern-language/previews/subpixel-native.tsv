@@ -1,0 +1,20 @@
+record	value
+geometry_owner	isomorphismes/Conway
+geometry_source_tree	fd873ad0a7c7e8c68c2c76c8e16cdd79a0d77486
+pattern	pattern-language/examples/conway-442.pattern
+pattern_sha256	c24b598a3187a5878d6f7268ccf16152bfec68f7e61ca7902da96f3a3d1012e9
+native_source	isomorphisms/rough.framebuffer@0a09edede932ba80feb7f35addede3eb17baf6f3
+ick_source	c61e448251744a2f40ad743ebef1a027bdcd2f9d
+geometry_export_sha256	7dc0112c802661a5053788359382f466903df0bfc6fc27f5bd7c42d18d6ce2d7
+canvas	256x256
+viewport_transform	0.35555555555555557,0,0,-0.35555555555555557,128,128
+orbit_transforms	648
+painted_shapes	1296
+arc_error_bound_pixels	0.01
+execution_target	Linux x86_64 host; no Android or physical-device claim
+
+strategy	patches_all_attempts	reference_chords	charged_work	worst_xor_bits	CPU_seconds	working_byte_allowance
+historical-baseline	UNINSTRUMENTED	UNINSTRUMENTED	UNINSTRUMENTED	NOT_APPLICABLE	0.055622	1163264
+quadratic-3x3	44320	240912	371324652	2	6.94183	2760704
+cubic-5x5	44320	240912	367685612	2	6.85476	2760704
+automatic	44320	240912	371324652	2	6.91274	2760704

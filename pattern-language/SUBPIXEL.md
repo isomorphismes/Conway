@@ -91,3 +91,21 @@ Omit `OUTPUT.sppath` or use `-` for standard output. `--tolerance PIXELS` contro
 only the circular approximation. Without `--size`, the actual `.pattern`
 canvas size is retained; a native comparison consumer may enforce a smaller
 size limit. Screen-size override changes scale and stroke width together.
+
+## Executed native comparison
+
+![Historical stroke, quadratic 3×3, cubic 5×5 and automatic](previews/subpixel-442.png)
+
+This is the actual 256×256 wallpaper rendered in four native modes, left to
+right. All 648 orbit transforms and 1,296 shape records are retained. Source
+pins, the exact viewport transform, work and approximation diagnostics are in
+[subpixel-native.tsv](previews/subpixel-native.tsv). The new paths are slower
+than the historical renderer on this host because the comparison also performs
+a fine whole-image diagnostic for every shape. No phone speed claim is made.
+CPU times are individual host runs under concurrent work, not a controlled
+performance benchmark. All four images were regenerated from the final native
+source pin and byte-compared with the retained comparison.
+
+The shared renderer reports at most two differing sample bits per pixel against
+its internal fine reference. Independent path and glyph oracles qualify the
+same native producer separately; this image alone is not a coverage oracle.
