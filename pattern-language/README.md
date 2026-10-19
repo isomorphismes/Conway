@@ -15,6 +15,10 @@ identified by the exact Cayley source commit under
 [`../boilerplate/archive/cayley-pr2/`](../boilerplate/archive/cayley-pr2/); it
 is not required to execute the Conway examples.
 
+The [native subpixel seam](SUBPIXEL.md) exports these same motifs and group
+orbits as ordered screen-space line and bounded cubic strokes for the
+`rough.framebuffer/subpixel` path renderer. Existing SVG output stays available.
+
 That separation is the important part: another language can generate the same
 IR without reproducing the group enumeration or rendering code. The current
 language inputs are collected under [`examples/`](examples/); the earlier live
