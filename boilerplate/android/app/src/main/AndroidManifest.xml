@@ -5,7 +5,7 @@
         android:allowBackup="false"
         android:hasCode="false"
         android:label="Conway"
-        android:theme="@android:style/Theme.Material.NoActionBar.Fullscreen">
+        android:theme="@style/Theme.Charcoal.Conway">
         <activity
             android:name="android.app.NativeActivity"
             android:configChanges="orientation|screenSize|keyboardHidden|density"

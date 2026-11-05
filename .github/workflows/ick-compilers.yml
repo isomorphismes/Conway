@@ -15,19 +15,25 @@ jobs:
       matrix:
         abi: [armeabi-v7a, arm64-v8a, x86_64]
     steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: isomorphisms/ai-ci
+          ref: f6d825d15cd3c0c34ae1b43240a463ff5d343090
+          path: .ai-ci-ick
+          persist-credentials: false
       - uses: android-actions/setup-android@9fc6c4e9069bf8d3d10b2204b1fb8f6ef7065407
         with:
           packages: platform-tools
       - name: Install the declared Android NDK
         run: sdkmanager "ndk;29.0.14206865"
       - name: Build and qualify the ICK frontend
-        uses: isomorphisms/ai-ci/ick-android@903b2cb27ea572c9c6cb2ffa9f39e0fbf06ec9f8
+        uses: isomorphisms/ai-ci/ick-android@f6d825d15cd3c0c34ae1b43240a463ff5d343090
         with:
           abi: ${{ matrix.abi }}
           ndk: ${{ env.ANDROID_HOME }}/ndk/29.0.14206865
           fortify-source: '2'
       - name: Retain the installed compiler and qualification receipt
-        run: tar -C "${{ runner.temp }}/ick-android-${{ matrix.abi }}-stage" -czf "${{ runner.temp }}/ick-${{ matrix.abi }}.tar.gz" .
+        run: make -f .ai-ci-ick/ick-android/Makefile archive-stage ABI="${{ matrix.abi }}" ICK_STAGE="${{ runner.temp }}/ick-android-${{ matrix.abi }}-stage" ICK_ARCHIVE="${{ runner.temp }}/ick-${{ matrix.abi }}.tar.gz"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: ick-${{ matrix.abi }}

@@ -37,7 +37,7 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           repository: isomorphisms/ai-ci
-          ref: 903b2cb27ea572c9c6cb2ffa9f39e0fbf06ec9f8
+          ref: f6d825d15cd3c0c34ae1b43240a463ff5d343090
           path: .ai-ci-ick
 
       - name: Download qualified compiler stages
@@ -98,7 +98,7 @@ jobs:
           lane: test
 
       - name: Verify declared source producers
-        uses: isomorphisms/ai-ci@903b2cb27ea572c9c6cb2ffa9f39e0fbf06ec9f8
+        uses: isomorphisms/ai-ci@f6d825d15cd3c0c34ae1b43240a463ff5d343090
         with:
           suite: ci/build-toolchain-suite.tsv
           root: .
